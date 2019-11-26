@@ -1,5 +1,12 @@
 class Visitor {
-  constructor(full_name,age,date_of_visit,time_of_visit,comments,name_of_assistor) {
+  constructor(
+    full_name,
+    age,
+    date_of_visit,
+    time_of_visit,
+    comments,
+    name_of_assistor
+  ) {
     this.full_name = full_name;
     this.age = age;
     this.date_of_visit = date_of_visit;
@@ -9,36 +16,57 @@ class Visitor {
     this.index;
   }
 
-    save(){
-        this.index = 0;
-        let myJSON = JSON.stringify(this,null, 4);
-        var fs = require('fs');
-        var data = fs.exists(`visitor_${this.index}.json`);
+  save() {
+    this.index = 0;
+    let myJSON = JSON.stringify(this, null, 4);
+    var fs = require("fs");
+    var data = fs.existsSync(`visitor_${this.index}.json`);
 
-        do{
-            this.index++;
-        }while(data);
-        fs.writeFile(`visitor_${this.index}.json`, myJSON, (msg) => {
-            if(msg) {
-                return msg;
-            }else{
-                console.log(`Data saved: ${myJSON}`);
-                 
-            }
-        });
-    };
+    do {
+      this.index++;
+    } while (data);
+    fs.writeFile(`visitor_${this.index}.json`, myJSON, msg => {
+      if (msg) {
+        console.log("CANNOT CREATE FILE!");
+        ;
+      } else {
+        console.log(`Data saved: ${myJSON}`);
+      }
+    });
+  }
 
-    load(){
-        
-    }
+  load() {
+    let myJSON = JSON.stringify(this, null, 4);
+    var fs = require("fs");
+    var data = fs.exists(`visitor_${this.index}.json`);
 
+    fs.readFile(`visitor_${this.index}.json`, myJSON, 'utf8', msg => {
+      if (msg) {
+        console.log(msg); 
+      } else {
+        console.log(`FILE FOUND: ${myJSON}`);
+      }
+    });
+  }
 }
 
-var alice = new Visitor();
-//alice.save();
-var bob = new Visitor("bob", 26, "23-03-2019", "08h00", "application unsuccesful", "faith");
+var alice = new Visitor(
+  "alice",
+  26,
+  "05-03-2019",
+  "13h00",
+  "application done",
+  "faith"
+);
+var bob = new Visitor(
+  "Bob Marley",
+  26,
+  "23-03-2019",
+  "08h00",
+  "application unsuccesful",
+  "faith"
+);
 //bob.save();
-var charlie = new Visitor("charlie", 22, "01-09-2019", "11h00", "application not done", "mike");
-//charlie.save();
-
-//alice.load();
+//alice.save();
+//alice.load(1);
+bob.load(1);
