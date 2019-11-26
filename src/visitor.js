@@ -8,7 +8,6 @@ class Visitor {
     this.time_of_visit = time_of_visit;
     this.comments = comments;
     this.name_of_assistor = name_of_assistor;
-    //this.visitors = [];
   }
 
   save() {
@@ -18,14 +17,15 @@ class Visitor {
     
     let correct_name_format = remove_spaces.toLowerCase(); //name has to be in lowercase letters
     
-    fs.writeFile(`visitor_${correct_name_format}.json`, myJSON, msg => { //create json file named using the correct name format
+    fs.writeFile(`visitor_${correct_name_format}.json`, myJSON, msg => { //create json file
       if (msg) {
-        return 'CANNOT CREATE!';
+        return 'CANNOT CREATE FILE!';
       } else {
-        return 'FILE CREATED!'; //after creating file, display data.
+        return myJSON; //after creating file, display data.
       }
+      
     });
-    return myJSON;
+    return `visitor_${correct_name_format}.json`;
   }
 
   load(full_name) {
@@ -46,16 +46,3 @@ class Visitor {
 }
 
 module.exports = Visitor;
-
-let charlie = new Visitor(
-  "Charlie Madison",
-  22,
-  "01-09-2019",
-  "11h00",
-  "application not done",
-  "mike"
-);
-
-let data = charlie.save();
-
-console.log(data);

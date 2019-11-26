@@ -1,7 +1,7 @@
 let Visitor = require('../src/visitor.js');
 
 describe("Visitors", () =>{
-    it("should show saved details", () =>{
+    it("should display JSON filename for Charlie", () =>{
         let charlie = new Visitor(
             "Charlie Madison",
             22,
@@ -12,13 +12,20 @@ describe("Visitors", () =>{
         );
 
         let data = charlie.save();
-        expect(data).toBe({
-            "full_name": "Charlie Madison",
-            "age": 22,
-            "date_of_visit": "01-09-2019",
-            "time_of_visit": "11h00",
-            "comments": "application not done",
-            "name_of_assistor": "mike"
-        });
-    })
+        expect(data).toBe("visitor_charlie_madison.json");
+    });
+
+    it("should display JSON filename for Bob", () =>{
+        let bob = new Visitor(
+            "Bob Marley",
+            26,
+            "23-03-2019",
+            "08h00",
+            "application unsuccessful",
+            "mike"
+        );
+
+        let data = bob.save();
+        expect(data).toBe("visitor_bob_marley.json");
+    });
 })
