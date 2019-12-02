@@ -28,4 +28,29 @@ describe("Visitors", () =>{
         let data = bob.save();
         expect(data).toBe("visitor_bob_marley.json");
     });
+    it("should display Json filename for Keke", () =>{
+        let keke = new Visitor(
+            "Keke Makhetha", 
+            30, 
+            "23-11-2019", 
+            "08h00", 
+            "completed something", 
+            "faith");
+            let data = keke.save();
+            expect(data).toBe("visitor_keke_makhetha.json");
+    });
+});
+
+describe("Load", () => {
+    it("should load JSON filename for Keke", ()=>{
+        let keke = new Visitor(
+            "Keke Makhetha", 
+            30, 
+            "23-11-2019", 
+            "08h00", 
+            "completed something", 
+            "faith");
+            let data = keke.load("Keke Makhetha");
+            expect(data).toBe("visitor_keke_makhetha.json");
+    })
 })

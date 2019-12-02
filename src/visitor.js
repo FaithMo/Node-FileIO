@@ -41,7 +41,7 @@ class Visitor {
         return data; //display data found
       }
     });
-    
+    return `visitor_${correct_name_format}.json`;
   }
 }
 
